@@ -20,47 +20,22 @@
 
     <script>
         $(function () {
-            var initData = "@base <http://tbbt.example.org/> . \
+        var initData = "@base <http://tbbt.example.org/> . \
                             @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . \
                             @prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> . \
 <http://purl.org/stuff/tred#root> a rdf:Resource ; \
 rdfs:label \"Root Resource\" .\
 ";
 
-            //   $(".apply").on("click", function () {
-            rdf.parseTurtle(initData, function (data) {
-                console.log(data.toString());
-                var resource = rdf.createNamedNode($('#resource').val());
-                rdf.parseTurtle($("#matchers").val(), function (matchers) {
-                    var rdf2h = new RDF2h(matchers);
-                    var rendered = rdf2h.render(data, resource);
-                    $("#output-window").text(rendered);
-                    $("#output-window-html").html(rendered);
-                });
-            })
+        //   $(".apply").on("click", function () {
+        rdf.parseTurtle(initData, function (data) {
+            console.log(data.toString());
+      //      var resource = rdf.createNamedNode($('#resource').val());
+            $("#data").text(data.toString());
+
+        })
         });
 
-        var showSample = function (exampleId) {
-            $('#resource').val($("#" + exampleId.replace("-sample", "-resource")).text().trim());
-            $('#matchers').text($("#" + exampleId.replace("-sample", "-matchers")).text().trim());
-            $('#data').text($("#" + exampleId.replace("-sample", "-data")).text().trim());
-            $("#output-window").text("");
-            $("#output-window-html").html("");
-        }
-
-        $(".sample-link").on("click", function () {
-            var exampleId = this.href.split("#")[1];
-            showSample(exampleId);
-            window.location.hash = exampleId;
-            return false;
-        });
-        if (!window.location.hash.endsWith("-sample")) {
-            showSample("bernadette-sample");
-        } else {
-            showSample(window.location.hash.substring(1));
-        }
-
-        });
     </script>
 </head>
 
