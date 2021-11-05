@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Trev</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=1000, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+
+<!-- standard libs -->
+    <script src="js/lib/rdf-ext/rdf-ext.js"></script>
+    <script src="js/lib/jquery-3.6.0.min.js"></script>
+
+<!-- hyperdata.it common libs -->
+    <script src="js/config.js"></script>
+    <script src="js/sparql-connector.js"></script>
+    <script src="js/utils.js"></script>
+
+<!-- trev-specific -->
+    <script src="js/trev.js"></script>
+
+    <script>
+        $(function () {
+        var initData = "@base <http://tbbt.example.org/> . \
+                            @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . \
+                            @prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> . \
+<http://purl.org/stuff/tred#root> a rdf:Resource ; \
+rdfs:label \"Root Resource\" .\
+";
+
+        //   $(".apply").on("click", function () {
+        rdf.parseTurtle(initData, function (data) {
+            console.log(data.toString());
+      //      var resource = rdf.createNamedNode($('#resource').val());
+            $("#data").text(data.toString());
+
+        })
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h1>Tred</h1>
+
+        </header>
+
+        <div id="main" role="main" class="borderradius">
+
+
+            <div class="entry">
+
+            </div>
+
+            <div>
+                Subject
+                <input id="subject" type="text" />
+                <input class="add" value="Subject" type="submit">
+            </div>
+
+            <div>
+                Property
+                <select>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <p>Object</p>
+            <div>
+                Resource
+                <input id="resource" type="text" />
+                <input class="add" value="Add Resource Triple" type="submit">
+                <p id="errors"><span></span>
+                </p>
+                <br class="clear">
+            </div>
+
+            <div>
+                Text
+                <input id="resource" type="text" />
+                <input class="add" value="Add Text Triple" type="submit">
+            </div>
+
+            <div>
+                Number
+                <input id="resource" type="text" />
+                <input class="add" value="Add Numeric Triple" type="submit">
+            </div>
+
+            <div>
+                <label for="turtle">RDF Data</label>
+                <textarea id="data" type="textarea" spellcheck="false">
+
+                </textarea>
+                <br class="clear">
+            </div>
+
+            <footer>
+                <p>
+                    Many thanks to
+                    <a href="https://www.bergnet.org/people/bergi/card#me">Thomas Bergwinkl</a>
+                    for <a href="https://github.com/zazukoians/rdf-ext">rdf-ext</a>
+                    and his continuous support.
+                </p>
+                <p>
+                    Want to add something? <a href="https://github.com/danja/tred ">Fork this on GitHub</a> and send me a pull request.
+                </p>
+            </footer>
+
+
+
+
+</body>
+
+</html>

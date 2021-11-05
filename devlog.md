@@ -23,3 +23,9 @@ While here, I think I'll add -
 - [marked](https://github.com/markedjs/marked) - markdown processor
 
 I'd got a boilerplate CSS downloaded from somewhere, might as well use that as a placeholder for now.
+
+re. vocabs - I did a _Project_ vocab years ago, copied over [here](https://github.com/danja/trev/blob/master/data/project-owl.n3). Also got the material I used for [FooWiki]() which mostly uses standard vocabs, [example here](https://github.com/danja/trev/blob/master/data/foowiki-example.ttl).
+
+I've got bits from [sparql-diamonds](https://github.com/danja/sparql-diamonds), sparql-connector.js, utils.js & config.js that should cover Ajax to the SPARQL store. That code includes a lot of cruft, so probably a good opportunity to tidy up.
+
+For convenience a SPARQL editor/client will be a good idea, but for now at least the one used in Fuseki will suffice. Maybe use the lib to make something a bit more customised.
