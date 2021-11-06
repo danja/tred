@@ -1,5 +1,28 @@
 # Trev Dev
 
+**2021-11-06**
+
+Hmm, I was wondering about page layout so looked what I used for the sparql-diamonds stuff.
+
+the bookmarking mini-app included : template engine **hogan**
+
+time format utils **moment.js**
+
+Hmm, ok.
+
+But I have reasonable CSS for 2-column, form layout, praps reusable...
+
+I have a starter TODO list on a sheet of A4.
+
+First items :
+
+- load vocab(s)
+- drop-down list of classes
+
+Ok, so I've got a vocab at :
+
+https://raw.githubusercontent.com/danja/trev/master/data/project-owl.n3
+
 **2021-11-05**
 
 So...coming back at this after 7 years. My requirements have changed a little, but the main point remains the same - be able to quickly edit & view RDF in the browser.
