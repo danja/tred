@@ -3,11 +3,11 @@
  */
 
 var SparqlServer = {
-  host: 'http://localhost:3333',
-  queryPath: '/bookmarks/sparql',
-  updatePath: '/bookmarks/update'
+  host: 'http://localhost:3030',
+  queryPath: '/test/sparql',
+  updatePath: '/test/update'
 }
 
 /* used in the RDF, not dereferenced here */
 
-var bookmarkBaseURI = 'http://hyperdata.it/bookmarks/'
+// var bookmarkBaseURI = 'http://hyperdata.it/bookmarks/'

@@ -1,5 +1,21 @@
 # Trev Dev
 
+**2021-11-09**
+
+Sooo, the other day I immediately got errors with using browserify on rdf-ext.
+
+What I really wanted was Plain Old Javascript in the browser, so pinged bergi again. He said that basically the browser angle was pretty much out of scope for rdf-ext and that if that's what I really wanted, webpack 4 is by far the best bet 'until everything is ESM'.
+
+But I've been musing on this. bergi's general approach is generally to do things _properly_, no matter how much work is involved. I'm a lot sloppier, and for this little project, quick & dirty is fine. So I reckon I'll put together what I need just using JS objects in the browser, but build it in a way that I can easily switch to rdf-ext later. (It isn't essential here, but I am certain to want RDF-in-browser before long for other projects, so I will try WebPack...).
+
+**2021-11-07**
+
+Last night I had a go at my TODO list for this project, didn't get past step one. Whatever little I knew of rdf-ext I've forgotten. So I pinged [bergi](https://www.bergnet.org/people/bergi/card). As ever, very helpful and we had a good chat. He'd got great pointers for me : [Get Started with RDF in Javascript](https://zazuko.com/get-started/developers/), also when I mentioned templating he told me JS now has it buit in : [Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+"browserify is old school, but still works for most use cases. webpack is the more heavy tool, that handles all possible use cases. There are more lightweight options, but they have more specific requirements to the packages (incl. dependencies)."
+
+Trying examples from _Get Started_ ^^ with browserify.
+
 **2021-11-06**
 
 Hmm, I was wondering about page layout so looked what I used for the sparql-diamonds stuff.
