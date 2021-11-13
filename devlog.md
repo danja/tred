@@ -1,5 +1,26 @@
 # Trev Dev
 
+**2021-11-13**
+
+Yesterday I had a play with ES6 Template Literals. Managed to rewrite the wikidata-name example at sparql-diamonds to use them. It's probably possible to do it in a more elegant fashion, but for now at least this kind of thing works ok :
+
+````
+      var wikidatanameQT = function (name) {
+        return `
+           PREFIX schema: <http://schema.org/>
+
+           SELECT DISTINCT ?link WHERE {
+
+           ?link schema:name "${name}"@en .
+        }`
+      }
+...
+
+ var wikidataNameSparql = wikidatanameQT(name)
+      ```
+
+
+
 **2021-11-09**
 
 Sooo, the other day I immediately got errors with using browserify on rdf-ext.
@@ -68,3 +89,4 @@ re. vocabs - I did a _Project_ vocab years ago, copied over [here](https://githu
 I've got bits from [sparql-diamonds](https://github.com/danja/sparql-diamonds), sparql-connector.js, utils.js & config.js that should cover Ajax to the SPARQL store. That code includes a lot of cruft, so probably a good opportunity to tidy up.
 
 For convenience a SPARQL editor/client will be a good idea, but for now at least the one used in Fuseki will suffice. Maybe use the lib to make something a bit more customised.
+````
