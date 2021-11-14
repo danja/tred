@@ -46,11 +46,26 @@
         var classes = []
         for (var i = 0; i < bindings.length; i++) {
           //  links.push({ link: bindings[i].link.value })
+          let label = bindings[i].label.value
+          classes.push({ label: bindings[i].class.value })
+
           console.log(bindings[i].label.value + ' : ' + bindings[i].class.value)
         }
 
         // var list = makeList(links)
         // $('#links').replaceWith(list)
+        populateClassesMenu(classes)
+      }
+
+      function populateClassesMenu (classes) {
+        var $dropdown = $('#classesDropdown')
+        $.each(classes, function () {
+          $dropdown.append(
+            $('<option />')
+              .val(this.url)
+              .text(this.label)
+          )
+        })
       }
 
       function getClasses () {
@@ -88,6 +103,8 @@
 
   <body>
     <h2>Trev</h2>
+
+    <select name="classesDropdown" id="classesDropdown" />
 
     <form id="name-form">
       <label>Name:</label>
