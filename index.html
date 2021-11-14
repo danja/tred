@@ -8,8 +8,8 @@
 
     <script src="js/config.js"></script>
 
-    <script src="js/utils.js"></script>
-    <script src="js/sparql-connector.js"></script>
+    <script src="js/utils-old.js"></script>
+    <script src="js/sparql-connector-old.js"></script>
 
     <script src="js/sparql-templates.js"></script>
     <script src="js/html-templates.js"></script>
@@ -47,25 +47,31 @@
         for (var i = 0; i < bindings.length; i++) {
           //  links.push({ link: bindings[i].link.value })
           let label = bindings[i].label.value
-          classes.push({ label: bindings[i].class.value })
-
-          console.log(bindings[i].label.value + ' : ' + bindings[i].class.value)
+          let url = bindings[i].class.value
+          classes[label] = url
         }
 
+        console.log('classes')
+        console.log(classes)
         // var list = makeList(links)
         // $('#links').replaceWith(list)
         populateClassesMenu(classes)
       }
 
       function populateClassesMenu (classes) {
+        // console.log('pop ' + JSON.stringify(classes))
         var $dropdown = $('#classesDropdown')
-        $.each(classes, function () {
-          $dropdown.append(
-            $('<option />')
-              .val(this.url)
-              .text(this.label)
+        for (var key in classes) {
+          $dropdown.append($('<option />').text(key))
+        }
+
+        /*
+        $.each(classes.key, function () {
+          console.log('this ' + this.label)
+
           )
         })
+        */
       }
 
       function getClasses () {
