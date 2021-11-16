@@ -1,0 +1,12 @@
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dc:   <http://purl.org/dc/terms/> 
+PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
+PREFIX prj:     <http://purl.org/stuff/project#>
+PREFIX x:     <http://purl.org/stuff/> 
+
+INSERT DATA { 
+   <http://hyperdata.it/trev> a prj:Project  .
+   <http://hyperdata.it/farelo> a prj:Project  .
+   <http://hyperdata.it/NewsMonitor> a prj:Project  .
+}

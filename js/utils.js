@@ -1,10 +1,14 @@
-// minimal 'structured object'/string/tree storage on localstorage
-// from https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
+/* 
+    minimal 'structured object'/string/tree storage 
+    wrapper over localstorage
+    see https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
+*/
+class Depot {
+  constructor (id) {
+    this.set('ID', id)
+  }
 
-// do with classes!!!
-
-var storage = {
-  set: function (key, value) {
+  set (key, value) {
     if (!key || !value) {
       return
     }
@@ -13,8 +17,9 @@ var storage = {
       value = JSON.stringify(value)
     }
     localStorage.setItem(key, value)
-  },
-  get: function (key) {
+  }
+
+  get (key) {
     var value = localStorage.getItem(key)
 
     if (!value) {
@@ -28,7 +33,8 @@ var storage = {
     if (value[0] === '{') {
       value = JSON.parse(value)
     }
-
     return value
   }
 }
+
+export { Depot }

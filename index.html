@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Wikidata named things</title>
+    <title>Trev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- link rel="icon" type="image/png" sizes="48x48" href="favicon.png" / -->
+
+    <link rel="stylesheet" href="css/two-column.css" />
+    <link rel="stylesheet" href="css/trev.css" />
 
     <script src="js/lib/jquery-3.6.0.min.js"></script>
 
@@ -20,23 +25,29 @@
 
         for (var i = 0; i < linkArray.length; i++) {
           console.log('linkArray[i] = ' + JSON.stringify(linkArray[i]))
-          //    list += templater(linkTemplate, linkArray[i])
-          list += linkHT(linkArray[i].link)
+          list += linkHT(linkArray[i])
         }
 
         return list + '</ul>'
       }
 
-      function wikidatanameHandler (json) {
-        var bindings = json.results.bindings
+      function listInstances (klass) {
+        submitQuery(instancesQT(klass), instancesHandler)
+      }
 
-        var links = []
+      function instancesHandler (json) {
+        var bindings = json.results.bindings
+        console.log('INSTANCES' + JSON.stringify(bindings))
+
+        var instances = []
         for (var i = 0; i < bindings.length; i++) {
-          links.push({ link: bindings[i].link.value })
+          let url = bindings[i].instance.value
+
+          instances.push(url)
         }
 
-        var list = makeList(links)
-        $('#links').replaceWith(list)
+        var list = makeList(instances)
+        $('#instances').replaceWith(list)
       }
 
       function classesHandler (json) {
@@ -51,37 +62,23 @@
           classes[label] = url
         }
 
-        console.log('classes')
-        console.log(classes)
         // var list = makeList(links)
         // $('#links').replaceWith(list)
         populateClassesMenu(classes)
       }
 
       function populateClassesMenu (classes) {
-        // console.log('pop ' + JSON.stringify(classes))
         var $dropdown = $('#classesDropdown')
         for (var key in classes) {
-          $dropdown.append($('<option />').text(key))
+          console.log('pop ' + key)
+          var option = $('<option />')
+          option.attr('value', classes[key])
+          $dropdown.append(option.text(key))
         }
-
-        /*
-        $.each(classes.key, function () {
-          console.log('this ' + this.label)
-
-          )
-        })
-        */
       }
 
       function getClasses () {
         submitQuery(classesQT(), classesHandler)
-      }
-
-      function getNamed (name) {
-        var wikidataNameSparql = wikidatanameQT(name)
-        // console.log('wikidataNameSparql = ' + wikidataNameSparql)
-        submitQuery(wikidataNameSparql, wikidatanameHandler)
       }
 
       function submitQuery (sparql, resultsHandler) {
@@ -102,22 +99,63 @@
           console.log($('#wikidata-name').val())
           getNamed($('#wikidata-name').val())
         })
+
+        $('#classesDropdown').change(function () {
+          const klass = $('#classesDropdown').val()
+          console.log('classesDropdown has changed' + klass)
+          listInstances(klass)
+        })
         //
       })
     </script>
   </head>
 
   <body>
-    <h2>Trev</h2>
+    <div class="main">
+      <h2>Trev</h2>
 
-    <select name="classesDropdown" id="classesDropdown" />
+      <div class="navbar">
+        <a href="https://hyperdata.it">hyperdata.it</a>
+      </div>
 
-    <form id="name-form">
-      <label>Name:</label>
-      <input type="text" id="wikidata-name" />
-      <button type="button" id="submit-button">Submit</button>
-    </form>
+      <div class="row">
+        <div class="column">
+          <h3>left</h3>
 
-    <p id="links"></p>
+          <p id="instances" />
+        </div>
+
+        <div class="column">
+          <h3>right</h3>
+          <form id="add-instance">
+            <fieldset id="fields">
+              <legend>Add Instance</legend>
+
+              <label for="classesDropdown">Class</label>
+              <select name="classesDropdown" id="classesDropdown"></select>
+
+              <label for="url">URL</label>
+              <input id="url" type="text" />
+
+              <!--
+        <label for="description">Description</label>
+        <textarea class="description" id="description">this is b3</textarea>
+        <label for="tags">Tags</label>
+        <input id="tags" type="text" value="tag1, tag2" />
+        <label for="nick">Creator</label>
+        <input id="nick" type="text" value="danja" />
+        -->
+            </fieldset>
+            <button type="button" id="submit-button">Submit</button>
+          </form>
+          <p>
+            <a href="https://hyperdata.it/xmlns/project/index.htm"
+              >Project Vocabulary</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
   </body>
+  <script type="module" src="test/depot.test.js"></script>
 </html>

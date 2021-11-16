@@ -1,0 +1,38 @@
+{
+  "name": "trev",
+  "version": "1.0.0",
+  "description": "triple editing and visualization",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "jest-environment-node",
+    "transform": {}
+  },
+  "scripts": {
+    "test": "node --input-type=module --experimental-vm-modules /home/danny/lib/node_modules/jest/bin/jest.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danja/trev.git"
+  },
+  "keywords": [
+    "rdf",
+    "editor",
+    "sparql",
+    "browser"
+  ],
+  "author": "Danny Ayers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danja/trev/issues"
+  },
+  "homepage": "https://github.com/danja/trev#readme",
+  "devDependencies": {
+    "jest": "^26.1.0",
+    "jest-environment-node": "^26.1.0"
+  }
+}

@@ -1,3 +1,3 @@
-var linkHT = function (link) {
-  return `<li><a href='${link}'>${link}</a></li>`
+var linkHT = function (url) {
+  return `<li><a href='${url}'>${url}</a></li>`
 }

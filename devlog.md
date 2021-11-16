@@ -1,5 +1,43 @@
 # Trev Dev
 
+**2021-11-16**
+
+updated node to 16.13.0 using https://phoenixnap.com/kb/update-node-js-version
+
+jest.config.js - nah, putting things into package.json
+
+Spent ages trying to get Jest running with ESM, it just wouldn't be happy.
+
+```
+ /home/danny/HKMS/trev/test/depot.test.js:3
+    import { Depot } from '../utils.js'
+    ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+```
+
+Gave up for now, install have added :
+
+```
+  <script type="module" src="test/depot.test.js"></script>
+```
+
+to the end of index.html
+
+**2021-11-15**
+
+(I've updated this machine to Ubuntu 21.10, getting rather a lot of random segfaults...)
+
+To avoid having to get vocabs every session I've started a class called Depot as a wrapper around localstorage.
+
+While I'm trying to figure this out, could do with tests. Jest seems to be a popular choice, can run from node CLI.
+
+npm install --save-dev --global jest
+
+https://itsfoss.com/upgrade-linux-kernel-ubuntu/
+
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.14/
+
 **2021-11-13**
 
 Yesterday I had a play with ES6 Template Literals. Managed to rewrite the wikidata-name example at sparql-diamonds to use them. It's probably possible to do it in a more elegant fashion, but for now at least this kind of thing works ok :

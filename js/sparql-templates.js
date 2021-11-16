@@ -4,6 +4,7 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 PREFIX dc:      <http://purl.org/dc/elements/1.1/> 
 PREFIX schema: <http://schema.org/>
+PREFIX x:     <http://purl.org/stuff/> 
 PREFIX prj:     <http://purl.org/stuff/project#>`
 
 var classesQT = function () {
@@ -16,6 +17,10 @@ var classesQT = function () {
              rdfs:label ?label
           }`
   )
+}
+
+var instancesQT = function (klass) {
+  return `SELECT DISTINCT ?instance WHERE {  ?instance a <${klass}> }`
 }
 
 var wikidatanameQT = function (name) {

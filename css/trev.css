@@ -1,11 +1,11 @@
-.bookmark-item {
+.item {
   border: 0px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px 10px 10px 10px;
 }
 
-.add-bookmark {
+.add-instance {
   border: 0px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -13,19 +13,22 @@
 }
 
 form {
-    position:absolute;
-    top:0;
-    right:0;
-  width: 40%;
-  margin: 20px;
+  /*
+  position: absolute;
+  top: 50px;
+  right: 0;
+  */
+  width: 50%;
+  margin: 10px;
 }
 
 button {
-    margin: 5px;
+  margin: 5px;
 }
 
 input,
-textarea {
+textarea,
+select {
   margin: 5px;
   /* clear: both; */
   float: left;
@@ -40,5 +43,5 @@ label {
 }
 
 fieldset {
-    font-weight: bold;
+  font-weight: bold;
 }
