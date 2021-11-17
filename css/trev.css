@@ -1,3 +1,23 @@
+#current-resource {
+  font-weight: bold;
+}
+
+.instance-item:hover {
+  font-weight: bold;
+}
+
+.url {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+}
+
+#instances-scroll ul {
+  /* border: 2px solid green; */
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 .item {
   border: 0px solid green;
   margin-top: 10px;
@@ -43,5 +63,5 @@ label {
 }
 
 fieldset {
-  font-weight: bold;
+  /* font-weight: bold; */
 }

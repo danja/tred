@@ -1,19 +1,25 @@
+/*
 @font-face {
   font-family: 'ThrumsSerif';
   src: url('thrums.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-
+*/
 body {
-  font-family: ThrumsSerif, sans-serif;
+  font-family: Verdana, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif;
+    font-family: "Times New Roman", Times, serif;
+    font-family: "Lucida Console", "Courier New", monospace; */
+
+  /* font-family: ThrumsSerif, serif; */
 }
 * {
   box-sizing: border-box;
 }
 
 /* The navigation bar */
-.navbar {
+nav {
   overflow: hidden;
   background-color: #336;
   position: fixed; /* Set the navbar to fixed position */
@@ -22,7 +28,7 @@ body {
 }
 
 /* Links inside the navbar */
-.navbar a {
+nav a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -32,7 +38,7 @@ body {
 }
 
 /* Change background on mouse-over */
-.navbar a:hover {
+nav a:hover {
   background: #ddd;
   color: black;
 }

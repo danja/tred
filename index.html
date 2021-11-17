@@ -12,24 +12,24 @@
     <script src="js/lib/jquery-3.6.0.min.js"></script>
 
     <script src="js/config.js"></script>
-
-    <script src="js/utils-old.js"></script>
-    <script src="js/sparql-connector-old.js"></script>
+    <script src="js/sparql-connector.js"></script>
+    <script src="js/trev.js"></script>
 
     <script src="js/sparql-templates.js"></script>
     <script src="js/html-templates.js"></script>
 
     <script type="text/javascript" language="javascript">
-      function makeList (linkArray) {
+      /*
+      function makeList (linkArray, template) {
         var list = '<ul>'
 
         for (var i = 0; i < linkArray.length; i++) {
-          console.log('linkArray[i] = ' + JSON.stringify(linkArray[i]))
-          list += linkHT(linkArray[i])
+          list += template(linkArray[i])
         }
 
         return list + '</ul>'
       }
+      */
 
       function listInstances (klass) {
         submitQuery(instancesQT(klass), instancesHandler)
@@ -37,17 +37,17 @@
 
       function instancesHandler (json) {
         var bindings = json.results.bindings
-        console.log('INSTANCES' + JSON.stringify(bindings))
-
-        var instances = []
+        var instanceList = $('<ul id="instance-list">')
         for (var i = 0; i < bindings.length; i++) {
           let url = bindings[i].instance.value
-
-          instances.push(url)
+          let instanceNode = $(instanceNodeHT(url))
+          instanceList.append(instanceNode)
+          instanceNode.click(function () {
+            let clicked = $(this).text()
+            $('#current-resource').val(clicked)
+          })
         }
-
-        var list = makeList(instances)
-        $('#instances').replaceWith(list)
+        $('#instances').replaceWith(instanceList)
       }
 
       function classesHandler (json) {
@@ -70,7 +70,7 @@
       function populateClassesMenu (classes) {
         var $dropdown = $('#classesDropdown')
         for (var key in classes) {
-          console.log('pop ' + key)
+          // console.log('pop ' + key)
           var option = $('<option />')
           option.attr('value', classes[key])
           $dropdown.append(option.text(key))
@@ -82,7 +82,7 @@
       }
 
       function submitQuery (sparql, resultsHandler) {
-        console.log(sparql)
+        //  console.log(sparql)
         var url =
           SparqlServer.queryEndpoint +
           '?query=' +
@@ -94,6 +94,10 @@
 
       $(document).ready(function () {
         getClasses()
+
+        $('#current-resource').on('input', function () {
+          // do something
+        })
 
         $('#submit-button').click(function () {
           console.log($('#wikidata-name').val())
@@ -114,30 +118,27 @@
     <div class="main">
       <h2>Trev</h2>
 
-      <div class="navbar">
+      <nav>
         <a href="https://hyperdata.it">hyperdata.it</a>
-      </div>
+      </nav>
 
       <div class="row">
         <div class="column">
           <h3>left</h3>
-
-          <p id="instances" />
-        </div>
-
-        <div class="column">
-          <h3>right</h3>
+          <div class="item">
+            <label for="current-resource">Current Resource</label>
+            <input
+              class="url"
+              id="current-resource"
+              type="text"
+              value="current resource"
+            />
+          </div>
           <form id="add-instance">
-            <fieldset id="fields">
-              <legend>Add Instance</legend>
+            <!-- fieldset id="fields">
+              <legend>Add Instance</legend -->
 
-              <label for="classesDropdown">Class</label>
-              <select name="classesDropdown" id="classesDropdown"></select>
-
-              <label for="url">URL</label>
-              <input id="url" type="text" />
-
-              <!--
+            <!--
         <label for="description">Description</label>
         <textarea class="description" id="description">this is b3</textarea>
         <label for="tags">Tags</label>
@@ -145,9 +146,22 @@
         <label for="nick">Creator</label>
         <input id="nick" type="text" value="danja" />
         -->
-            </fieldset>
+            <!-- /fieldset -->
             <button type="button" id="submit-button">Submit</button>
           </form>
+        </div>
+
+        <div class="column">
+          <h3>right</h3>
+          <label for="classesDropdown">Class</label>
+          <select name="classesDropdown" id="classesDropdown"></select>
+          <fieldset>
+            <legend>Instances</legend>
+            <div id="instances-scroll">
+              <p id="instances" class="url" />
+            </div>
+          </fieldset>
+
           <p>
             <a href="https://hyperdata.it/xmlns/project/index.htm"
               >Project Vocabulary</a
