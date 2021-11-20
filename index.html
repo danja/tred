@@ -46,6 +46,10 @@
         $('#instance-list').replaceWith(instanceList)
       }
 
+      function updateHandler (response) {
+        alert(response)
+      }
+
       function classesHandler (json) {
         var bindings = json.results.bindings
         console.log(JSON.stringify(bindings))
@@ -71,23 +75,41 @@
         }
       }
 
+      function appendTriple (txt) {
+        console.log('new ' + txt)
+        var box = $('#new-triples')
+        box.val(box.val() + txt)
+      }
+
+      function generate () {
+        const currentResource = $('#current-resource').val()
+        const klass = $('#classesDropdown').val()
+
+        if ($('#add-class-checkbox').prop('checked')) {
+          var triple = '<' + currentResource + '> a <' + klass + '> . \n'
+          appendTriple(triple)
+        }
+      }
+
       $(document).ready(function () {
         $('#instances-block').hide()
         submitQuery(classesQT(), classesHandler) // get classes for dropdown
 
         $('#current-resource').on('input', function () {
-          console.log('INPUT')
+          // console.log('INPUT')
           $('#instances-block').hide()
         })
 
         $('#submit-button').click(function () {
-          console.log($('#wikidata-name').val())
-          getNamed($('#wikidata-name').val())
+          submitUpdate(postTriplesQT, updateHandler)
+        })
+
+        $('#generate-button').click(function () {
+          generate()
         })
 
         $('#classesDropdown').change(function () {
           const klass = $('#classesDropdown').val()
-          console.log('DROPDOWN CHANGE ' + klass)
           $('#instances-block').show()
           submitQuery(instancesQT(klass), instancesHandler) // get instances for list
         })
@@ -102,68 +124,69 @@
 
       <nav>
         <a href="https://hyperdata.it">hyperdata.it</a>
+        <a href="https://hyperdata.it/xmlns/project/index.htm"
+          >Project Vocabulary</a
+        >
       </nav>
 
       <div class="row">
         <div class="column">
           <h3>left</h3>
-          <div>
-            <!-- class="item" -->
-            <label for="current-resource">Current Resource</label>
+          <div class="block">
+            <legend>Current Resource</legend>
             <input
               class="url"
               id="current-resource"
               type="text"
               value="current resource"
             />
+            <button type="button" id="clone">Clone</button>
           </div>
-          <form id="add-instance">
-            <fieldset id="triple-fields">
-              <legend>Add Triples</legend>
+
+          <div class="block">
+            <legend>Add Triples</legend>
+            <div class="check">
               <label
-                ><input class="check" type="checkbox" />Add Class
+                ><input id="add-class-checkbox" type="checkbox" />Add Class
                 Membership</label
               >
-              <!--
-              <label for="add-class">Add Class Membership</label>
-              <input
-               
-                type="checkbox"
-                id="add-class"
-                name="add-class"
-              />
-              -->
-            </fieldset>
-            <!--
+            </div>
+          </div>
+
+          <!--/fieldset -->
+          <!--
         <label for="description">Description</label>
         <textarea class="description" id="description">this is b3</textarea>
         <label for="tags">Tags</label>
         <input id="tags" type="text" value="tag1, tag2" />
         <label for="nick">Creator</label>
         <input id="nick" type="text" value="danja" />
-        -->
-
-            <button type="button" id="generate-button">Generate</button>
-            <button type="button" id="submit-button">Submit</button>
-          </form>
-        </div>
+        --></div>
 
         <div class="column">
           <h3>right</h3>
-          <label for="classesDropdown">Class</label>
-          <select name="classesDropdown" id="classesDropdown"></select>
-          <fieldset id="instances-block">
+
+          <div class="block">
+            <button type="button" id="generate-button">Generate</button>
+            <button type="button" id="submit-button">Submit</button>
+          </div>
+
+          <div class="block">
+            <legend>New Triples</legend>
+            <textarea id="new-triples"></textarea>
+          </div>
+
+          <div class="block">
+            <legend>Class</legend>
+            <select name="classesDropdown" id="classesDropdown"></select>
+          </div>
+
+          <div class="block">
             <legend>Instances</legend>
             <div id="instances-scroll">
               <div id="instance-list" />
             </div>
-          </fieldset>
-
-          <p>
-            <a href="https://hyperdata.it/xmlns/project/index.htm"
-              >Project Vocabulary</a
-            >
-          </p>
+          </div>
         </div>
       </div>
     </div>

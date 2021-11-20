@@ -1,3 +1,22 @@
+.block {
+  /* width: -moz-fit-content; */
+  /*height: fit-content; */
+  position: relative;
+  border: 1px solid green;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+#new-triples {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  border: 0px;
+}
+
 #current-resource {
   width: 100%;
   font-weight: bold;
@@ -19,23 +38,16 @@
   overflow-y: scroll;
 }
 
-.item {
-  border: 0px solid green;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px 10px 10px 10px;
-}
-
-.add-instance {
-  border: 0px solid green;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px 10px 10px 10px;
-}
-
 .check {
+  /*
   position: relative;
   top: 1px;
+  */
+  border: 10px 10px 10px 10px;
+}
+
+legend {
+  font-weight: bold;
 }
 
 form {

@@ -1,3 +1,14 @@
+function submitQuery (sparql, resultsHandler) {
+  //  console.log(sparql)
+  var url =
+    SparqlServer.queryEndpoint +
+    '?query=' +
+    encodeURIComponent(sparql) +
+    '&output=json'
+
+  doQuery(url, resultsHandler)
+}
+
 function doQuery (pageURL, callback) {
   $.ajax({
     url: pageURL,
@@ -23,13 +34,32 @@ function doQuery (pageURL, callback) {
     })
 }
 
-function submitQuery (sparql, resultsHandler) {
-  //  console.log(sparql)
+function submitUpdate (sparql, resultsHandler) {
+  console.log(sparql)
   var url =
-    SparqlServer.queryEndpoint +
+    SparqlServer.updateEndpoint +
     '?query=' +
     encodeURIComponent(sparql) +
     '&output=json'
 
   doQuery(url, resultsHandler)
+}
+
+function doUpdate (endpoint, sparql) {
+  $.ajax({
+    type: 'POST',
+    url: endpoint,
+    headers: {
+      Accept: 'text/plain,*/*;q=0.9'
+    },
+    data: {
+      update: sparql
+    }
+  })
+    .done(function () {
+      //  window.location.href = window.location.href.replace("edit.html", "page.html");
+    })
+    .fail(function (e) {
+      alert('error doInsert' + JSON.stringify(e))
+    })
 }
