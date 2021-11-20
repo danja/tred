@@ -36,19 +36,9 @@ function doQuery (pageURL, callback) {
 
 function submitUpdate (sparql, resultsHandler) {
   console.log(sparql)
-  var url =
-    SparqlServer.updateEndpoint +
-    '?query=' +
-    encodeURIComponent(sparql) +
-    '&output=json'
-
-  doQuery(url, resultsHandler)
-}
-
-function doUpdate (endpoint, sparql) {
   $.ajax({
     type: 'POST',
-    url: endpoint,
+    url: SparqlServer.updateEndpoint,
     headers: {
       Accept: 'text/plain,*/*;q=0.9'
     },
@@ -56,9 +46,10 @@ function doUpdate (endpoint, sparql) {
       update: sparql
     }
   })
-    .done(function () {
-      //  window.location.href = window.location.href.replace("edit.html", "page.html");
+    .done(function (response) {
+      resultsHandler(response)
     })
+
     .fail(function (e) {
       alert('error doInsert' + JSON.stringify(e))
     })

@@ -35,5 +35,6 @@ var wikidatanameQT = function (name) {
 }
 
 var postTriplesQT = function (triples) {
+  console.log('triple = ' + triples)
   return `INSERT DATA { ${triples} }`
 }

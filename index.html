@@ -98,10 +98,11 @@
         $('#current-resource').on('input', function () {
           // console.log('INPUT')
           $('#instances-block').hide()
+          $('#new-triples').val('')
         })
 
         $('#submit-button').click(function () {
-          submitUpdate(postTriplesQT, updateHandler)
+          submitUpdate(postTriplesQT($('#new-triples').val()), updateHandler)
         })
 
         $('#generate-button').click(function () {
