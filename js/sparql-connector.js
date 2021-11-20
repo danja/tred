@@ -22,3 +22,14 @@ function doQuery (pageURL, callback) {
       alert('error in doQuery')
     })
 }
+
+function submitQuery (sparql, resultsHandler) {
+  //  console.log(sparql)
+  var url =
+    SparqlServer.queryEndpoint +
+    '?query=' +
+    encodeURIComponent(sparql) +
+    '&output=json'
+
+  doQuery(url, resultsHandler)
+}
