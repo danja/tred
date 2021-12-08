@@ -6,7 +6,7 @@ Good progress all round.
 
 Shifted the CSS to grid-based.
 
-Started a list of [use-cases](use-cases.md) to help organise functionality, it really isn't obvious right now.
+Started a list of [use-cases](https://github.com/danja/trev/blob/master/docs/use-cases.md) to help organise functionality, it really isn't obvious right now.
 
 I think I'll try to stick to it being a single-page thing, keep it reasonably simple. But am using up space rapidly.
 

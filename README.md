@@ -8,7 +8,7 @@ _I had a quick stab at this in 2015 and then forgot about it. Now I want an RDF 
 
 **2021-12-08** lots of progress made, but still far from usable
 
-_for detailed status see [devlog](devlog.md)_
+_for detailed status see [devlog](https://github.com/danja/trev/blob/master/docs/devlog.md)_
 
 **2021-11-05** : Revisiting, starting pretty much from scratch.
 
