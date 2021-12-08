@@ -1,5 +1,38 @@
 # Trev Dev
 
+**2021-12-05**
+
+https://chrome.google.com/webstore/detail/visbug
+
+https://cssgr.id/
+
+---
+
+https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm
+
+https://nodejs.org/api/esm.html
+
+https://github.com/puppeteer/puppeteer
+
+https://jestjs.io/docs/ecmascript-modules
+
+https://github.com/tom-sherman/blog/blob/master/posts/02-running-jest-tests-in-a-browser.md
+
+https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870
+
+https://betterprogramming.pub/an-introduction-to-jest-javascript-testing-framework-b6677f0d30d
+
+**2021-11-20**
+
+Got a bit further. The approach I've been following is along the lines of simple additive construction. You specify/choose a resource as the current focus. Right now I've got it to show a dropdown of the rdfs:Classes in the store. You can choose one of these, check Add Class Membership, click Generate and it assembles the corresponding data into an edit box, click Submit to insert it into the store.
+
+[16:38, 20/11/2021] Danny Ayers: I reckon I need to look at what actual data I'll have for a typical project
+[16:39, 20/11/2021] Danny Ayers: I've got so many started but unfinished...
+[16:39, 20/11/2021] Danny Ayers: I just remembered an electronics project I want to make : an accurate signal generator
+[16:41, 20/11/2021] Danny Ayers: for the kind of electronics I do (especially music-related stuff), a signal generator is essential
+[16:42, 20/11/2021] Danny Ayers: I have something I can use from the computer (part of an oscilloscope unit) but it's a bit inconvenient in practice
+[16:43, 20/11/2021] Danny Ayers: also got one I made ages ago - very good good for quick tests, but really not accurate
+
 **2021-11-16**
 
 updated node to 16.13.0 using https://phoenixnap.com/kb/update-node-js-version

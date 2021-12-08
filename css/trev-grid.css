@@ -1,0 +1,85 @@
+body {
+  background-color: rgb(159, 255, 239);
+}
+
+nav {
+  overflow: hidden;
+  background-color: #336;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+nav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background: #ddd;
+  color: black;
+}
+
+legend {
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.block {
+  background-color: white;
+  /* height: 200px; */
+  height: 30%;
+}
+
+.url {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+}
+
+.instance-item:hover {
+  font-weight: bold;
+}
+
+.check {
+  /*
+    position: relative;
+    top: 1px;
+    */
+  border: 10px 10px 10px 10px;
+}
+
+#new-triples {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+  font-size: 80%;
+
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border: 0px;
+}
+
+#current-resource {
+  width: 100%;
+  font-weight: bold;
+}
+
+#instances-scroll {
+  height: 200px;
+}
+
+#instances-scroll ul {
+  /* border: 2px solid green; */
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
