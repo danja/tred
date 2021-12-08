@@ -149,14 +149,14 @@
       <div class="block">
         <legend>Class</legend>
         <select name="classesDropdown" id="classesDropdown"></select>
-      </div>
-
-      <div class="block">
-        <legend>Add Triples</legend>
         <div class="check">
           <label>Add Class Membership</label>
           <input id="add-class-checkbox" type="checkbox" />
         </div>
+      </div>
+
+      <div class="block">
+        <legend>Add Triples</legend>
       </div>
 
       <!--/fieldset -->
@@ -172,16 +172,19 @@
       <div class="block">
         <legend>Instances</legend>
         <div id="instances-scroll">
-          <div id="instance-list" />
+          <p id="instance-list" class="scroll" />
         </div>
       </div>
 
-      <div class="block">
+      <div class="block">N1</div>
+
+      <div id="add-triples" class="block">
         <legend>New Triples</legend>
-        <textarea id="new-triples"></textarea>
+        <textarea id="new-triples" class="scroll"></textarea>
       </div>
 
-      <div class="block"><legend>N1</legend></div>
+      <div class="block"><div>N2</div></div>
+
       <div class="block">
         <button type="button" id="generate-button">Generate</button>
         <button type="button" id="submit-button">Submit</button>
