@@ -46,8 +46,18 @@ legend {
   height: 200px;
 }
 
+.triple {
+  font-size: 80%;
+  font-family: 'Lucida Console', 'Courier New', monospace;
+}
+
 .url {
   font-family: 'Lucida Console', 'Courier New', monospace;
+}
+
+.literal {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+  font-style: italic;
 }
 
 .instance-item:hover {
@@ -60,9 +70,6 @@ legend {
     top: 1px;
     */
   border: 10px 10px 10px 10px;
-}
-
-#add-triples {
 }
 
 #new-triples {

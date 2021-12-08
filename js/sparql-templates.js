@@ -20,7 +20,15 @@ var classesQT = function () {
 }
 
 var instancesQT = function (klass) {
-  return `SELECT DISTINCT ?instance WHERE {  ?instance a <${klass}> }`
+  return `SELECT DISTINCT ?instance WHERE { ?instance a <${klass}> }`
+}
+
+var property_objectQT = function (subject) {
+  return `SELECT DISTINCT ?property ?object WHERE { <${subject}> ?property ?object }`
+}
+
+var subject_propertyQT = function (object) {
+  return `SELECT DISTINCT ?subject ?property WHERE { ?subject ?property <${object}> }`
 }
 
 var wikidatanameQT = function (name) {

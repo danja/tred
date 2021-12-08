@@ -1,40 +1,10 @@
-/* 
-    minimal 'structured object'/string/tree storage 
-    wrapper over localstorage
-    see https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
-*/
-class Depot {
-  constructor (id) {
-    this.set('ID', id)
+/* will probably fail with nested NSs */
+
+function prefixify (url) {
+  for (const [ns, prefix] of Object.entries(nsPrefixes)) {
+    if (url.startsWith(ns)) {
+      return prefix + ':' + url.substring(ns.length)
+    }
   }
-
-  set (key, value) {
-    if (!key || !value) {
-      return
-    }
-
-    if (typeof value === 'object') {
-      value = JSON.stringify(value)
-    }
-    localStorage.setItem(key, value)
-  }
-
-  get (key) {
-    var value = localStorage.getItem(key)
-
-    if (!value) {
-      return
-    }
-    if (value == null) {
-      return false
-    }
-
-    // assume it is an object that has been stringified
-    if (value[0] === '{') {
-      value = JSON.parse(value)
-    }
-    return value
-  }
+  return url
 }
-
-export { Depot }

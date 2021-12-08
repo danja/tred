@@ -13,13 +13,14 @@
     <script src="js/lib/jquery-3.6.0.min.js"></script>
 
     <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/sparql-connector.js"></script>
     <script src="js/trev.js"></script>
 
     <script src="js/sparql-templates.js"></script>
     <script src="js/html-templates.js"></script>
 
-    <script type="text/javascript" language="javascript"></script>
+    <!-- script type="module" src="test/depot.test.js"></script -->
   </head>
 
   <body>
@@ -58,9 +59,9 @@
       </div>
 
       <div class="block">
-        <legend>Triples</legend>
-        <div id="po-scroll">
-          <p id="po-list" class="scroll" />
+        <legend>PO</legend>
+        <div id="property-object-scroll">
+          <p id="property-object-list" class="scroll" />
         </div>
       </div>
 
@@ -97,5 +98,4 @@
       </div>
     </div>
   </body>
-  <script type="module" src="test/depot.test.js"></script>
 </html>
