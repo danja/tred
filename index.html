@@ -19,105 +19,7 @@
     <script src="js/sparql-templates.js"></script>
     <script src="js/html-templates.js"></script>
 
-    <script type="text/javascript" language="javascript">
-      /*
-      function makeList (linkArray, template) {
-        var list = '<ul>'
-
-        for (var i = 0; i < linkArray.length; i++) {
-          list += template(linkArray[i])
-        }
-
-        return list + '</ul>'
-      }
-      */
-
-      function instancesHandler (json) {
-        var bindings = json.results.bindings
-        var instanceList = $('<ul id="instance-list">')
-        for (var i = 0; i < bindings.length; i++) {
-          let url = bindings[i].instance.value
-          let instanceNode = $(instanceNodeHT(url))
-          instanceList.append(instanceNode)
-          instanceNode.click(function () {
-            let clicked = $(this).text()
-            $('#current-resource').val(clicked)
-          })
-        }
-        $('#instance-list').replaceWith(instanceList)
-      }
-
-      function updateHandler (response) {
-        alert(response)
-      }
-
-      function classesHandler (json) {
-        var bindings = json.results.bindings
-        console.log(JSON.stringify(bindings))
-
-        var classes = []
-        for (var i = 0; i < bindings.length; i++) {
-          let label = bindings[i].label.value
-          let url = bindings[i].class.value
-          classes[label] = url
-        }
-
-        // var list = makeList(links)
-        // $('#links').replaceWith(list)
-        populateClassesMenu(classes)
-      }
-
-      function populateClassesMenu (classes) {
-        var $dropdown = $('#classesDropdown')
-        for (var key in classes) {
-          var option = $('<option />')
-          option.attr('value', classes[key])
-          $dropdown.append(option.text(key))
-        }
-      }
-
-      function appendTriple (txt) {
-        console.log('new ' + txt)
-        var box = $('#new-triples')
-        box.val(box.val() + txt)
-      }
-
-      function generate () {
-        const currentResource = $('#current-resource').val()
-        const klass = $('#classesDropdown').val()
-
-        if ($('#add-class-checkbox').prop('checked')) {
-          var triple = '<' + currentResource + '> a <' + klass + '> . \n'
-          appendTriple(triple)
-        }
-      }
-
-      $(document).ready(function () {
-        $('#instances-block').hide()
-        submitQuery(classesQT(), classesHandler) // get classes for dropdown
-
-        $('#current-resource').on('input', function () {
-          // console.log('INPUT')
-          $('#instances-block').hide()
-          $('#new-triples').val('')
-        })
-
-        $('#submit-button').click(function () {
-          submitUpdate(postTriplesQT($('#new-triples').val()), updateHandler)
-        })
-
-        $('#generate-button').click(function () {
-          generate()
-        })
-
-        $('#classesDropdown').change(function () {
-          const klass = $('#classesDropdown').val()
-          $('#instances-block').show()
-          submitQuery(instancesQT(klass), instancesHandler) // get instances for list
-        })
-        //
-      })
-    </script>
+    <script type="text/javascript" language="javascript"></script>
   </head>
 
   <body>
@@ -143,7 +45,7 @@
           type="text"
           value="current resource"
         />
-        <button type="button" id="clone">Clone</button>
+        <button type="button" id="load-button">Load</button>
       </div>
 
       <div class="block">
@@ -156,7 +58,10 @@
       </div>
 
       <div class="block">
-        <legend>Add Triples</legend>
+        <legend>Triples</legend>
+        <div id="po-scroll">
+          <p id="po-list" class="scroll" />
+        </div>
       </div>
 
       <!--/fieldset -->
@@ -188,6 +93,7 @@
       <div class="block">
         <button type="button" id="generate-button">Generate</button>
         <button type="button" id="submit-button">Submit</button>
+        <button type="button" id="clear-button">Clear</button>
       </div>
     </div>
   </body>
