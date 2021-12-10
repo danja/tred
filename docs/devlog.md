@@ -1,5 +1,21 @@
 # Trev Dev
 
+**2021-12-10**
+
+Last session I added a bit to list s, p, o triples where s is the Current resource. Displaying these in a readable form suggests using NS prefixes. 
+
+Slight complication, the angle brackets - used with IRIs, not with prefixed names
+
+EXAMPLE 9 in https://www.w3.org/TR/turtle/
+
+
+
+
+
+https://rdf.js.org/
+
+https://github.com/rdfjs/comunica-browser
+
 **2021-12-08**
 
 Good progress all round.
