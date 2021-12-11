@@ -1,16 +1,35 @@
 # Trev Dev
 
+**2021-12-11**
+
+It's very confusing!
+
+I think I need to create a renderer/editor for (lists of) single triples to use everywhere...
+
+Big use for this is Project stuff, so making a quick & dirty editor to create instance data for that.
+
 **2021-12-10**
 
-Last session I added a bit to list s, p, o triples where s is the Current resource. Displaying these in a readable form suggests using NS prefixes. 
+Last session I added a bit to list s, p, o triples where s is the Current resource. Displaying these in a readable form suggests using NS prefixes.
 
 Slight complication, the angle brackets - used with IRIs, not with prefixed names
 
 EXAMPLE 9 in https://www.w3.org/TR/turtle/
 
+---
 
+note for later:
 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT ?name
+WHERE { ?x foaf:name ?name
+FILTER regex(?name, "^ali", "i") }
 
+for regex on URIs,
+
+FILTER regex(str(?name), "stuff", "i")
+
+---
 
 https://rdf.js.org/
 

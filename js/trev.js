@@ -1,3 +1,5 @@
+function renderTriple (parentElement, subject, predicate, object) {}
+
 function instancesHandler (json) {
   var bindings = json.results.bindings
   var instanceList = $('<ul id="instance-list">')
