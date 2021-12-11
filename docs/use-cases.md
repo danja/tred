@@ -5,16 +5,26 @@
 
 ## Use Cases (no order of priority yet)
 
+top-down : list classes, list properties
+bottom-up :
+
 https://en.wikipedia.org/wiki/Use_case
 
-### Use the local subgraph to a resource to define the characteristics of a new resource (clone/templating)
+### Finding/viewing
 
-### Add abritrary triple
+#### Use the local subgraph to a resource to define the characteristics of a new resource (clone/templating)
 
-### Edit/delete triple(s) ('kill resource?')
+- [ ] load ?, p, o
+- [ ] load s, ?, o
+- [ ] load s, p, ?
+-
 
-### Locate a resource with known characteristics
+#### Add abritrary triple
 
-### List the classes to which a resource belongs
+#### Edit/delete triple(s) ('kill resource?')
 
-### List all triples in which a given resource is involved (?, P, O / S, ?, O / S, P, ?)
+#### Locate a resource with known characteristics
+
+#### List the classes to which a resource belongs
+
+#### List all triples in which a given resource is involved (?, P, O / S, ?, O / S, P, ?)

@@ -1,5 +1,7 @@
 # TODO
 
+see also use-case.md
+
 ## Setup local model, load vocab from URL (Turtle)
 
 this one for starters : https://raw.githubusercontent.com/danja/trev/master/data/project.n3
