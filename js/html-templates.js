@@ -22,3 +22,11 @@ var property_object_literalHT = function (subject, property, object) {
               <span class="literal">"${object}" .</span>
           </span>`
 }
+
+var tripleHT = function(subject, property, object){
+    return `<div class="triple-ui">
+              <input type="text" class="subject" value="${subject}"/>
+              <input type="text" class="property" value="${property}"/>
+              <input type="text" class="object" value="${object}"/>
+            </div>`
+}

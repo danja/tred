@@ -1,4 +1,53 @@
-function renderTriple (parentElement, subject, predicate, object) {}
+
+const nsPrefixes = {
+  'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf',
+  'http://www.w3.org/2000/01/rdf-schema#': 'rdfs',
+  'http://xmlns.com/foaf/0.1/': 'foaf',
+  'http://www.w3.org/2002/07/owl#': 'owl',
+  'http://purl.org/dc/elements/1.1/': 'dc',
+  'http://schema.org/': 'schema',
+  'http://purl.org/stuff/': 'x',
+  'http://purl.org/stuff/project#': 'prj'
+}
+
+class ViewNode {
+
+  constructor(value, type) {
+    this.value = value
+    this.view = value
+    this.type = type // uri, prefixed, literal, bnode
+  }
+
+makeView () {
+
+if(this.type == 'uri'){
+  for (const [ns, prefix] of Object.entries(nsPrefixes)) {
+    if (this.value.startsWith(ns)) {
+      this.view = prefix + ':' + this.value.substring(ns.length)
+      this.type = 'prefixed' // redundant
+      if(this.view == 'rdf:type'){
+        this.view = 'a'
+      }
+      break
+    }
+  }
+}
+if(this.type == 'literal'){
+  this.view = '"'+this.value+'"'
+}
+  return this.view
+}
+
+}
+
+function test()   {
+  // renderTripleView($('#triple-view'), 'ssss', 'pppp', 'oooo')
+}
+
+function renderTripleView (parentElement, subjectView, predicateView, objectView) {
+    var triple = $(tripleHT(subjectView.makeView(), predicateView.makeView(), objectView.makeView()))
+    triple.appendTo(parentElement)
+}
 
 function instancesHandler (json) {
   var bindings = json.results.bindings
@@ -27,8 +76,16 @@ function property_objectHandler (json) {
   for (let i = 0; i < bindings.length; i++) {
     // console.log(JSON.stringify(binding))
 
+var subjectViewNode = new ViewNode($('#current-resource').val(), 'uri')
+// console.log(subjectViewNode.makeView())
     const property = bindings[i].property.value
+
+    var propertyViewNode = new ViewNode(bindings[i].property.value, bindings[i].property.type)
+
     const object = bindings[i].object.value
+
+        var objectViewNode = new ViewNode(bindings[i].object.value, bindings[i].object.type)
+
     const type = bindings[i].object.type
     console.log(type)
     const s = prefixify(currentResource)
@@ -41,7 +98,8 @@ function property_objectHandler (json) {
       triple = property_object_literalHT(s, p, o)
     }
     console.log(triple)
-    $('#property-object-list').append(triple)
+    $('#property-object-list').append(triple) 
+    renderTripleView($('#triple-view'), subjectViewNode, propertyViewNode, objectViewNode)
   }
 }
 
@@ -87,6 +145,7 @@ function generate () {
 }
 
 $(document).ready(function () {
+  test()
   $('#instances-block').hide()
 
   submitQuery(classesQT(), classesHandler) // get classes for dropdown
