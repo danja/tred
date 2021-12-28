@@ -81,6 +81,7 @@ function updateHandler (response) {
   alert(response)
 }
 
+// results from <resource>, ?p, ?o
 function property_objectHandler (json) {
   var bindings = json.results.bindings
 
@@ -98,6 +99,32 @@ function property_objectHandler (json) {
 
     renderTripleView(
       $('#property-object-list'),
+      subjectViewNode,
+      propertyViewNode,
+      objectViewNode
+    )
+  }
+}
+
+// results from ?s, ?p, <resource>
+function subject_propertyHandler (json) {
+  var bindings = json.results.bindings
+
+  for (let i = 0; i < bindings.length; i++) {
+    var subjectViewNode = new ViewNode(
+      bindings[i].subject.value,
+      bindings[i].subject.type
+    )
+
+    var propertyViewNode = new ViewNode(
+      bindings[i].property.value,
+      bindings[i].property.type
+    )
+
+    var objectViewNode = new ViewNode($('#current-resource').val(), 'uri')
+
+    renderTripleView(
+      $('#subject-property-list'),
       subjectViewNode,
       propertyViewNode,
       objectViewNode
@@ -161,7 +188,8 @@ $(document).ready(function () {
   $('#load-button').click(function () {
     const currentResource = $('#current-resource').val()
     // console.log(currentResource)
-    submitQuery(property_objectQT(currentResource), property_objectHandler) // get ? ?p ?o
+    submitQuery(property_objectQT(currentResource), property_objectHandler) // get <resource> ?p ?o
+    submitQuery(subject_propertyQT(currentResource), subject_propertyHandler) // get ?s ?p <resource>
   })
 
   $('#submit-button').click(function () {

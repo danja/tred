@@ -29,5 +29,6 @@ var tripleHT = function (subject, property, object) {
               <input type="text" class="property" value="${property}"/>
               <input type="text" class="object" value="${object}"/>
               <input type="checkbox" class="remove" />
+              <button type="button" id="clone-triple-button">+</button>
             </div>`
 }

@@ -5,7 +5,8 @@ PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 PREFIX dc:      <http://purl.org/dc/elements/1.1/> 
 PREFIX schema: <http://schema.org/>
 PREFIX x:     <http://purl.org/stuff/> 
-PREFIX prj:     <http://purl.org/stuff/project#>`
+PREFIX prj:     <http://purl.org/stuff/project#>
+`
 
 var classesQT = function () {
   return (
@@ -23,10 +24,12 @@ var instancesQT = function (klass) {
   return `SELECT DISTINCT ?instance WHERE { ?instance a <${klass}> }`
 }
 
+// <resource>, ?p, ?o
 var property_objectQT = function (subject) {
   return `SELECT DISTINCT ?property ?object WHERE { <${subject}> ?property ?object }`
 }
 
+// ?s, ?p, <resource>
 var subject_propertyQT = function (object) {
   return `SELECT DISTINCT ?subject ?property WHERE { ?subject ?property <${object}> }`
 }
@@ -44,5 +47,5 @@ var wikidatanameQT = function (name) {
 
 var postTriplesQT = function (triples) {
   console.log('triple = ' + triples)
-  return `INSERT DATA { ${triples} }`
+  return `${commonPrefixes} INSERT DATA { ${triples} }`
 }

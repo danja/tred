@@ -8,6 +8,8 @@ making UI tweaks to allow in-place editing
 
 I think I'll have to capture two Turtle strings : remove & add
 
+Eek! Another complication, bnodes
+
 **2021-12-11**
 
 It's very confusing!
