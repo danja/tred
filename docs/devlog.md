@@ -1,5 +1,13 @@
 # Trev Dev
 
+**2021-12-28**
+
+It's very confusing!
+
+making UI tweaks to allow in-place editing
+
+I think I'll have to capture two Turtle strings : remove & add
+
 **2021-12-11**
 
 It's very confusing!

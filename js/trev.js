@@ -1,4 +1,3 @@
-
 const nsPrefixes = {
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf',
   'http://www.w3.org/2000/01/rdf-schema#': 'rdfs',
@@ -11,42 +10,56 @@ const nsPrefixes = {
 }
 
 class ViewNode {
-
-  constructor(value, type) {
+  constructor (value, type) {
     this.value = value
     this.view = value
     this.type = type // uri, prefixed, literal, bnode
   }
 
-makeView () {
-
-if(this.type == 'uri'){
-  for (const [ns, prefix] of Object.entries(nsPrefixes)) {
-    if (this.value.startsWith(ns)) {
-      this.view = prefix + ':' + this.value.substring(ns.length)
-      this.type = 'prefixed' // redundant
-      if(this.view == 'rdf:type'){
-        this.view = 'a'
+  makeView () {
+    if (this.type == 'uri') {
+      for (const [ns, prefix] of Object.entries(nsPrefixes)) {
+        if (this.value.startsWith(ns)) {
+          this.view = `${prefix}:${this.value.substring(ns.length)}`
+          //    this.view = prefix + ':' + this.value.substring(ns.length)
+          this.type = 'prefixed' // redundant
+          if (this.view == 'rdf:type') {
+            this.view = 'a'
+          }
+          break
+        }
       }
-      break
+      if (this.type != 'prefixed') {
+        // ugly
+        this.view = `<${this.value}>`
+      }
     }
+    if (this.type == 'literal') {
+      this.view = `"${this.value}"`
+      // this.view = '"' + this.value + '"'
+    }
+    return this.view
   }
 }
-if(this.type == 'literal'){
-  this.view = '"'+this.value+'"'
-}
-  return this.view
-}
 
-}
-
-function test()   {
+function test () {
   // renderTripleView($('#triple-view'), 'ssss', 'pppp', 'oooo')
 }
 
-function renderTripleView (parentElement, subjectView, predicateView, objectView) {
-    var triple = $(tripleHT(subjectView.makeView(), predicateView.makeView(), objectView.makeView()))
-    triple.appendTo(parentElement)
+function renderTripleView (
+  parentElement,
+  subjectView,
+  predicateView,
+  objectView
+) {
+  var triple = $(
+    tripleHT(
+      subjectView.makeView(),
+      predicateView.makeView(),
+      objectView.makeView()
+    )
+  )
+  triple.appendTo(parentElement)
 }
 
 function instancesHandler (json) {
@@ -69,37 +82,26 @@ function updateHandler (response) {
 }
 
 function property_objectHandler (json) {
-  const currentResource = $('#current-resource').val()
   var bindings = json.results.bindings
-  console.log(JSON.stringify(bindings))
-  console.log('property_objectHandler')
+
   for (let i = 0; i < bindings.length; i++) {
-    // console.log(JSON.stringify(binding))
+    var subjectViewNode = new ViewNode($('#current-resource').val(), 'uri')
+    var propertyViewNode = new ViewNode(
+      bindings[i].property.value,
+      bindings[i].property.type
+    )
 
-var subjectViewNode = new ViewNode($('#current-resource').val(), 'uri')
-// console.log(subjectViewNode.makeView())
-    const property = bindings[i].property.value
+    var objectViewNode = new ViewNode(
+      bindings[i].object.value,
+      bindings[i].object.type
+    )
 
-    var propertyViewNode = new ViewNode(bindings[i].property.value, bindings[i].property.type)
-
-    const object = bindings[i].object.value
-
-        var objectViewNode = new ViewNode(bindings[i].object.value, bindings[i].object.type)
-
-    const type = bindings[i].object.type
-    console.log(type)
-    const s = prefixify(currentResource)
-    const p = prefixify(property)
-    const o = prefixify(object)
-    let triple = ''
-    if (type == 'uri') {
-      triple = property_object_uriHT(s, p, o)
-    } else {
-      triple = property_object_literalHT(s, p, o)
-    }
-    console.log(triple)
-    $('#property-object-list').append(triple) 
-    renderTripleView($('#triple-view'), subjectViewNode, propertyViewNode, objectViewNode)
+    renderTripleView(
+      $('#property-object-list'),
+      subjectViewNode,
+      propertyViewNode,
+      objectViewNode
+    )
   }
 }
 
