@@ -1,5 +1,11 @@
 # Trev Dev
 
+**2022-01-07**
+
+https://forge.extranet.logilab.fr/open-source/SemWeb/sparqlexplorer
+https://github.com/andrewstellman/sparql-explorer
+https://id.nlm.nih.gov/mesh/query
+
 **2021-12-28**
 
 It's very confusing!
