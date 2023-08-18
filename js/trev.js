@@ -136,8 +136,8 @@ function extractLastPathPart(url) {
   return match ? match[1] : null;
 }
 
-const url = "http://one/two/three/four#five";
-console.log(extractLastPathPart(url)); // outputs: "four"
+// const url = "http://one/two/three/four#five";
+// console.log(extractLastPathPart(url)); // outputs: "four"
 
 function classesHandler(json) {
   var bindings = json.results.bindings

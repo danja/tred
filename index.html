@@ -1,76 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Trev</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- link rel="icon" type="image/png" sizes="48x48" href="favicon.png" / -->
 
-    <!-- link rel="stylesheet" href="css/two-column.css" / -->
-    <!-- link rel="stylesheet" href="css/trev.css" / -->
-    <link rel="stylesheet" href="css/trev-grid.css" />
+<head>
+  <meta charset="utf-8" />
+  <title>Trev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- link rel="icon" type="image/png" sizes="48x48" href="favicon.png" / -->
 
-    <script src="js/lib/jquery-3.6.0.min.js"></script>
+  <!-- link rel="stylesheet" href="css/two-column.css" / -->
+  <!-- link rel="stylesheet" href="css/trev.css" / -->
+  <link rel="stylesheet" href="css/trev-grid.css" />
 
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/sparql-connector.js"></script>
-    <script src="js/trev.js"></script>
+  <script src="js/lib/jquery-3.6.0.min.js"></script>
 
-    <script src="js/sparql-templates.js"></script>
-    <script src="js/html-templates.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/sparql-connector.js"></script>
+  <script src="js/trev.js"></script>
 
-    <!-- script type="module" src="test/depot.test.js"></script -->
-  </head>
+  <script src="js/sparql-templates.js"></script>
+  <script src="js/html-templates.js"></script>
 
-  <body>
-    <div name="header">
-      <h2>Trev</h2>
+  <!-- script type="module" src="test/depot.test.js"></script -->
+</head>
 
-      <nav>
-        <a href="https://hyperdata.it">hyperdata.it</a>
-        <a href="https://hyperdata.it/xmlns/project/index.htm"
-          >Project Vocabulary</a
-        >
-      </nav>
+<body>
+  <div name="header">
+    <h2>Trev</h2>
+
+    <nav>
+      <a href="https://hyperdata.it">hyperdata.it</a>
+      <a href="https://hyperdata.it/xmlns/project/index.htm">Project Vocabulary</a>
+    </nav>
+  </div>
+
+  <div class="grid">
+    <!-- main -->
+
+    <div class="block">
+      <legend>Current Resource</legend>
+      <input class="url" id="current-resource" type="text" value="http://purl.org/rss/1.0/channel" />
+      <button type="button" id="load-button">Load</button>
     </div>
 
-    <div class="grid">
-      <!-- main -->
-
-      <div class="block">
-        <legend>Current Resource</legend>
-        <input
-          class="url"
-          id="current-resource"
-          type="text"
-          value="current resource"
-        />
-        <button type="button" id="load-button">Load</button>
+    <div class="block">
+      <legend>Class</legend>
+      <select name="classesDropdown" id="classesDropdown"></select>
+      <div class="check">
+        <label>Add Class Membership</label>
+        <input id="add-class-checkbox" type="checkbox" />
       </div>
+    </div>
 
-      <div class="block">
-        <legend>Class</legend>
-        <select name="classesDropdown" id="classesDropdown"></select>
-        <div class="check">
-          <label>Add Class Membership</label>
-          <input id="add-class-checkbox" type="checkbox" />
-        </div>
+    <div class="block">
+      <legend>Triples</legend>
+      <p>Subject Property Object Remove Clone</p>
+      <div id="property-object-scroll">
+        <p id="property-object-list" class="scroll" />
       </div>
-
-      <div class="block">
-        <legend>Triples</legend>
-        <p>Subject Property Object Remove Clone</p>
-        <div id="property-object-scroll">
-          <p id="property-object-list" class="scroll" />
-        </div>
-        <div id="subject-property-scroll">
-          <p id="subject-property-list" class="scroll" />
-        </div>
+      <div id="subject-property-scroll">
+        <p id="subject-property-list" class="scroll" />
       </div>
+    </div>
 
-      <!--/fieldset -->
-      <!--
+    <!--/fieldset -->
+    <!--
         <label for="description">Description</label>
         <textarea class="description" id="description">this is b3</textarea>
         <label for="tags">Tags</label>
@@ -79,34 +73,35 @@
         <input id="nick" type="text" value="danja" />
         -->
 
-      <div class="block">
-        <legend>Instances</legend>
-        <div id="instances-scroll">
-          <p id="instance-list" class="scroll" />
-        </div>
-      </div>
-
-      <div id="remove-triples" class="block">
-        <legend>Remove</legend>
-        <textarea id="old-triples" class="scroll"></textarea>
-      </div>
-
-      <div id="add-triples" class="block">
-        <legend>Add</legend>
-        <textarea id="new-triples" class="scroll"></textarea>
-      </div>
-
-      <div class="block">
-        <div>
-          <ul id="triple-view"></ul>
-        </div>
-      </div>
-
-      <div class="block">
-        <button type="button" id="generate-button">Generate</button>
-        <button type="button" id="submit-button">Submit</button>
-        <button type="button" id="clear-button">Clear</button>
+    <div class="block">
+      <legend>Instances</legend>
+      <div id="instances-scroll">
+        <p id="instance-list" class="scroll" />
       </div>
     </div>
-  </body>
+
+    <div id="remove-triples" class="block">
+      <legend>Remove</legend>
+      <textarea id="old-triples" class="scroll"></textarea>
+    </div>
+
+    <div id="add-triples" class="block">
+      <legend>Add</legend>
+      <textarea id="new-triples" class="scroll"></textarea>
+    </div>
+
+    <div class="block">
+      <div>
+        <ul id="triple-view"></ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <button type="button" id="generate-button">Generate</button>
+      <button type="button" id="submit-button">Submit</button>
+      <button type="button" id="clear-button">Clear</button>
+    </div>
+  </div>
+</body>
+
 </html>
