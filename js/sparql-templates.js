@@ -11,12 +11,14 @@ PREFIX prj:     <http://purl.org/stuff/project#>
 var classesQT = function () {
   return (
     commonPrefixes +
-    `
-             SELECT DISTINCT ?class ?label WHERE {
-  
-             ?class a rdfs:Class ;
-             rdfs:label ?label
-          }`
+    ` SELECT DISTINCT ?class ?label WHERE {
+      GRAPH ?g { 
+      OPTIONAL { ?s a ?class . } 
+        OPTIONAL { ?class a rdfs:Class . }
+        OPTIONAL { ?class a owl:Class . }
+        OPTIONAL { ?class rdfs:label ?label . }
+      }
+    }`
   )
 }
 

@@ -3,8 +3,8 @@
  */
 
 const SparqlServer = {
-  queryEndpoint: 'http://localhost:3030/test/sparql',
-  updateEndpoint: 'http://localhost:3030/test/update'
+  queryEndpoint: 'https://fuseki.hyperdata.it/newsmonitor',
+  updateEndpoint: 'https://fuseki.hyperdata.it/newsmonitor'
   //   queryEndpoint: 'https://query.wikidata.org/sparql',
   //  host: 'http://localhost:3030',
   //  queryPath: '/test/sparql',

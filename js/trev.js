@@ -10,13 +10,13 @@ const nsPrefixes = {
 }
 
 class ViewNode {
-  constructor (value, type) {
+  constructor(value, type) {
     this.value = value
     this.view = value
     this.type = type // uri, prefixed, literal, bnode
   }
 
-  makeView () {
+  makeView() {
     if (this.type == 'uri') {
       for (const [ns, prefix] of Object.entries(nsPrefixes)) {
         if (this.value.startsWith(ns)) {
@@ -33,8 +33,7 @@ class ViewNode {
         // ugly
         this.view = `<${this.value}>`
       }
-    }
-    if (this.type == 'literal') {
+    } if (this.type == 'literal') {
       this.view = `"${this.value}"`
       // this.view = '"' + this.value + '"'
     }
@@ -42,11 +41,11 @@ class ViewNode {
   }
 }
 
-function test () {
+function test() {
   // renderTripleView($('#triple-view'), 'ssss', 'pppp', 'oooo')
 }
 
-function renderTripleView (
+function renderTripleView(
   parentElement,
   subjectView,
   predicateView,
@@ -62,7 +61,7 @@ function renderTripleView (
   triple.appendTo(parentElement)
 }
 
-function instancesHandler (json) {
+function instancesHandler(json) {
   var bindings = json.results.bindings
   var instanceList = $('<ul id="instance-list">')
   for (var i = 0; i < bindings.length; i++) {
@@ -77,12 +76,12 @@ function instancesHandler (json) {
   $('#instance-list').replaceWith(instanceList)
 }
 
-function updateHandler (response) {
+function updateHandler(response) {
   alert(response)
 }
 
 // results from <resource>, ?p, ?o
-function property_objectHandler (json) {
+function property_objectHandler(json) {
   var bindings = json.results.bindings
 
   for (let i = 0; i < bindings.length; i++) {
@@ -107,7 +106,7 @@ function property_objectHandler (json) {
 }
 
 // results from ?s, ?p, <resource>
-function subject_propertyHandler (json) {
+function subject_propertyHandler(json) {
   var bindings = json.results.bindings
 
   for (let i = 0; i < bindings.length; i++) {
@@ -132,23 +131,39 @@ function subject_propertyHandler (json) {
   }
 }
 
-function classesHandler (json) {
+function extractLastPathPart(url) {
+  const match = url.match(/\/([^\/]+)\/?(\?|#|$)/);
+  return match ? match[1] : null;
+}
+
+const url = "http://one/two/three/four#five";
+console.log(extractLastPathPart(url)); // outputs: "four"
+
+function classesHandler(json) {
   var bindings = json.results.bindings
   console.log(JSON.stringify(bindings))
 
   var classes = []
-  for (let i = 0; i < bindings.length; i++) {
-    let label = bindings[i].label.value
-    let url = bindings[i].class.value
-    classes[label] = url
-  }
 
+  // TODO tidy
+  for (let i = 0; i < bindings.length; i++) {
+    let url = bindings[i].class.value
+    if (bindings[i].label != undefined) {
+      let label = bindings[i].label.value
+      classes[label] = bindings[i].label.value
+    } else {
+      let label = extractLastPathPart(url)
+      classes[label] = extractLastPathPart(url)
+    }
+
+  }
   // var list = makeList(links)
   // $('#links').replaceWith(list)
   populateClassesMenu(classes)
 }
 
-function populateClassesMenu (classes) {
+
+function populateClassesMenu(classes) {
   var $dropdown = $('#classesDropdown')
   for (var key in classes) {
     var option = $('<option />')
@@ -157,13 +172,13 @@ function populateClassesMenu (classes) {
   }
 }
 
-function appendTriple (txt) {
+function appendTriple(txt) {
   console.log('new ' + txt)
   var box = $('#new-triples')
   box.val(box.val() + txt)
 }
 
-function generate () {
+function generate() {
   const currentResource = $('#current-resource').val()
   const klass = $('#classesDropdown').val()
 
